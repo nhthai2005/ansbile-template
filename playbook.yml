@@ -1,0 +1,11 @@
+- hosts: webserver
+  tasks:
+    - name: include vault 
+      include_vars: "inventory/lock.yml"
+      tags: ["always"]
+    - name: run command with sudo
+      shell: cat /etc/os-release
+      become: yes
+      register: output
+    - debug:
+        var: output
